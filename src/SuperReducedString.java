@@ -3,13 +3,14 @@ import java.util.*;
 
 public class SuperReducedString {
 
-    static String superReducedString(String s) {
+    /*static String superReducedString(String s) {
 
         s = s + " ";
 
         String z = "";
 
         for (int i = 0; i < s.length() - 1; i++) {
+
             if (s.charAt(i) == s.charAt(i + 1)) {
                 i = i + 1;
             } else {
@@ -31,6 +32,34 @@ public class SuperReducedString {
             return z;
         }
         else return superReducedString(z);
+    }*/
+
+    static String superReducedString(String s) {
+
+
+        Stack <Character> c = new Stack<Character>();
+        for(int i=0;i<s.length();i++)
+        {
+            if(c.empty()){
+                c.push(s.charAt(i));
+            }
+            else if(c.peek().equals(s.charAt(i))){
+                c.pop();
+            }
+            else c.push(s.charAt(i));
+        }
+        String z="";
+        if(c.isEmpty()){return "Empty String";}
+        else {
+            while (!c.empty()) {
+                z += c.pop();
+            }
+            String res = "";
+            for (int i = z.length() - 1; i >= 0; i--) {
+                res += z.charAt(i);
+            }
+            return res;
+        }
     }
 
     public static void main(String[] args) {
